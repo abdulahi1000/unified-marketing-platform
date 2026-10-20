@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_facebook_ads_group
+    description: "Staging model for Facebook ad group data."
+    columns:
+      - name: ad_group_id
+        description: "Unique identifier for the Facebook ad group."
+        tests:
+          - unique
+          - not_null
+      - name: ad_group_name
+        description: "Name of the Facebook ad group."
+      - name: ad_group_updated_at
+        description: "Timestamp when the ad group was last updated."

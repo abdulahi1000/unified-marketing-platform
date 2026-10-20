@@ -1,0 +1,61 @@
+version: 2
+
+models:
+  - name: int_facebook_ads_details
+    description: "Latest descriptive attributes for each Facebook ad, enriched with ad group, campaign, and account details."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - ad_id
+    columns:
+      - name: ad_id
+        description: "Unique identifier for the Facebook ad."
+        data_tests:
+          - not_null
+          - unique
+
+      - name: ad_group_id
+        description: "Identifier of the ad group containing the ad."
+
+      - name: campaign_id
+        description: "Identifier of the campaign containing the ad."
+
+      - name: account_id
+        description: "Identifier of the Facebook advertising account."
+
+      - name: ad_name
+        description: "Name of the Facebook ad."
+
+      - name: ad_status
+        description: "Configured status of the Facebook ad."
+
+      - name: ad_group_name
+        description: "Name of the ad group containing the ad."
+
+      - name: campaign_name
+        description: "Name of the campaign containing the ad."
+
+      - name: account_name
+        description: "Name of the Facebook advertising account."
+
+      - name: channel_name
+        description: "Standardized marketing channel assigned to the ad."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Paid Social
+
+      - name: ad_detail_updated_at
+        description: "Most recent update timestamp across the ad, ad group, campaign, and account details."
+
+      - name: data_src
+        description: "Source system identifier for the record."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - facebook_ads

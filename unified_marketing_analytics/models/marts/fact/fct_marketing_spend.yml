@@ -1,0 +1,53 @@
+version: 2
+
+models:
+  - name: fct_marketing_spend
+    description: "Unified daily Facebook and Snapchat ad performance fact table. The grain is one row per source platform, ad, country, and date."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - data_src
+              - ad_id
+              - ad_country
+              - ad_date
+    columns:
+      - name: ad_key
+        description: "Surrogate key for the corresponding record in dim_marketing_ads."
+        data_tests:
+          - not_null
+      - name: ad_id
+        description: "Natural ad identifier supplied by the source platform."
+        data_tests:
+          - not_null
+      - name: account_id
+        description: "Identifier of the advertising account associated with the ad."
+      - name: ad_country
+        description: "Country code reported for the ad performance row when supplied by the source."
+      - name: ad_currency_code
+        description: "Currency code reported for the ad performance row when supplied by the source."
+      - name: ad_date
+        description: "Date on which the ad performance was recorded."
+        data_tests:
+          - not_null
+      - name: data_src
+        description: "Source platform identifier."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - facebook_ads
+                  - snapchat_ads
+      - name: ad_spend
+        description: "Amount spent on the ad for the day."
+      - name: ad_impressions
+        description: "Number of impressions delivered by the ad for the day."
+      - name: ad_clicks
+        description: "Number of clicks received by the ad for the day."
+      - name: ad_ctr
+        description: "Click-through rate, calculated as clicks divided by impressions."
+      - name: ad_cpc
+        description: "Cost per click, calculated as spend divided by clicks."
+      - name: ad_cpm
+        description: "Cost per thousand impressions, calculated as spend divided by impressions multiplied by 1,000."

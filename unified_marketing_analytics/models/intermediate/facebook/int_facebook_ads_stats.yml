@@ -1,0 +1,51 @@
+version: 2
+
+models:
+  - name: int_facebook_ads_stats
+    description: "Daily Facebook ad performance metrics with calculated efficiency measures."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - ad_id
+              - ad_date
+    columns:
+      - name: ad_id
+        description: "Identifier of the Facebook ad."
+        data_tests:
+          - not_null
+
+      - name: account_id
+        description: "Identifier of the Facebook advertising account."
+
+      - name: ad_spend
+        description: "Amount spent on the ad for the day."
+
+      - name: ad_impressions
+        description: "Number of impressions delivered by the ad for the day."
+
+      - name: ad_clicks
+        description: "Number of clicks received by the ad for the day."
+
+      - name: ad_date
+        description: "Date on which the ad performance was recorded."
+        data_tests:
+          - not_null
+
+      - name: data_src
+        description: "Source system identifier for the record."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - facebook_ads
+
+      - name: ad_ctr
+        description: "Click-through rate, calculated as clicks divided by impressions."
+
+      - name: ad_cpc
+        description: "Cost per click, calculated as spend divided by clicks."
+
+      - name: ad_cpm
+        description: "Cost per thousand impressions, calculated as spend divided by impressions."

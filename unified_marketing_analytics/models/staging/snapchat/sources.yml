@@ -1,0 +1,49 @@
+sources:
+  - name: snapchat_ads
+    database: bronze_production
+    schema: unified_marketing_staging
+    description: "This schema contains the staging tables for the snapchat source."
+    config:
+      enabled: true
+      meta:
+        owner: "data_team"
+        source_type: "Data Warehouse"
+      freshness:
+        warn_after:
+          count: 2
+          period: day
+
+    tables:
+      - name: snapchat_ads_campaign_names
+        description: "This table contains the snapchat ad campaign names."
+        config:
+          enabled: true
+          meta:
+            owner: "data_team"
+
+      - name: snapchat_ad_names
+        description: "Snapchat Ad Set names from the source."
+        config:
+          enabled: true
+          event_time: ad_detail_updated_at
+          loaded_at_field: ad_detail_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: snapchat_ads_group_names
+        description: "Snapchat Ad Group names from the source."
+        config:
+          enabled: true
+          event_time: ad_group_updated_at
+          loaded_at_field: ad_group_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: snapchat_ads_stats
+        description: "Snapchat Ad Stats data from the source."
+        config:
+          enabled: true
+          event_time: ad_date
+          loaded_at_field: ad_date
+          meta:
+            owner: "data_team"

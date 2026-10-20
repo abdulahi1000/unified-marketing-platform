@@ -1,0 +1,26 @@
+version: 2
+
+models:
+  - name: stg_snapchat_ads_stats
+    description: "Staging model for Snapchat ad performance statistics."
+    columns:
+      - name: ad_detail_id
+        description: "Source identifier of the Snapchat ad detail associated with the statistics."
+        tests:
+          - not_null
+      - name: ad_currency_code
+        description: "Currency code reported by the Snapchat source."
+      - name: ad_country
+        description: "Country code reported by the Snapchat source."
+      - name: ad_spend
+        description: "Amount spent on the ad."
+      - name: ad_impressions
+        description: "Number of times the ad was shown."
+      - name: ad_clicks
+        description: "Number of clicks on the ad."
+      - name: data_src
+        description: "Source associated with the ad statistics."
+      - name: ad_date
+        description: "Date the ad performance statistics were recorded."
+        tests:
+          - not_null

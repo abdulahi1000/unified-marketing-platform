@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: stg_facebook_ads
+    description: "Staging model for Facebook ads, with ad-level identifiers and metadata."
+    columns:
+      - name: ad_id
+        description: "Unique identifier for the Facebook ad."
+        tests:
+          - unique
+          - not_null
+      - name: campaign_id
+        description: "Identifier of the campaign containing the ad."
+      - name: ad_group_id
+        description: "Identifier of the ad group containing the ad."
+      - name: account_id
+        description: "Identifier of the Facebook advertising account."
+      - name: ad_name
+        description: "Name of the Facebook ad."
+      - name: ad_status
+        description: "Configured status of the ad."
+      - name: ad_updated_at
+        description: "Timestamp when the ad was last updated."

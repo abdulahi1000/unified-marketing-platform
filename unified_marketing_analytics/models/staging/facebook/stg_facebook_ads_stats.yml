@@ -1,0 +1,28 @@
+version: 2
+
+models:
+  - name: stg_facebook_ads_stats
+    description: "Staging model for Facebook ad performance statistics."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - ad_id
+              - ad_date
+    columns:
+      - name: ad_id
+        description: "Identifier of the Facebook ad associated with the statistics."
+        tests:
+          - not_null
+      - name: account_id
+        description: "Identifier of the Facebook advertising account."
+      - name: ad_spend
+        description: "Amount spent on the ad."
+      - name: ad_impressions
+        description: "Number of times the ad was shown."
+      - name: ad_clicks
+        description: "Number of clicks on the ad."
+      - name: ad_date
+        description: "Date the ad performance statistics were recorded."
+        tests:
+          - not_null

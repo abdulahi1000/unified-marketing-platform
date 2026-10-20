@@ -1,0 +1,46 @@
+version: 2
+
+models:
+  - name: int_snapchat_ads_details
+    description: "Latest descriptive attributes for each Snapchat ad, enriched with the available ad group and campaign details."
+    data_tests:
+      - dbt_utils.unique_combination_of_columns:
+          arguments:
+            combination_of_columns:
+              - ad_id
+    columns:
+      - name: ad_id
+        description: "Unique identifier for the Snapchat ad."
+        data_tests:
+          - not_null
+          - unique
+      - name: ad_group_id
+        description: "Identifier of the Snapchat ad group containing the ad."
+      - name: campaign_id
+        description: "Identifier of the Snapchat campaign containing the ad group."
+      - name: account_id
+        description: "Identifier of the advertising account associated with the campaign."
+      - name: ad_name
+        description: "Name of the Snapchat ad."
+      - name: ad_group_name
+        description: "Name of the Snapchat ad group."
+      - name: campaign_name
+        description: "Name of the Snapchat campaign."
+      - name: channel_name
+        description: "Standardized marketing channel assigned to the ad."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - Paid Social
+      - name: ad_detail_updated_at
+        description: "Most recent available update timestamp across the ad and ad group details."
+      - name: data_src
+        description: "Source system identifier for the record."
+        data_tests:
+          - not_null
+          - accepted_values:
+              arguments:
+                values:
+                  - snapchat_ads

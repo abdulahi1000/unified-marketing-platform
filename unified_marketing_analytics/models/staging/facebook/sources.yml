@@ -1,0 +1,60 @@
+sources:
+  - name: facebook_ads
+    database: bronze_production
+    schema: unified_marketing_staging
+    description: "This schema contains the staging tables for the facebook source."
+    config:
+      enabled: true
+      meta:
+        owner: "data_team"
+        source_type: "Data Warehouse"
+      freshness:
+        warn_after:
+          count: 2
+          period: day
+
+    tables:
+      - name: facebook_new_acccount
+        description: "This table contains the new facebook account data."
+        config:
+          enabled: true
+          event_time: account_updated_at
+          loaded_at_field: account_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: facebook_campaign
+        description: "Facebook Ad Campaign data from the source."
+        config:
+          enabled: true
+          event_time: campaign_updated_at
+          loaded_at_field: campaign_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: facebook_ads
+        description: "Facebook Ad Set data from the source."
+        config:
+          enabled: true
+          event_time: ad_updated_at
+          loaded_at_field: ad_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: facebook_adgroup
+        description: "Facebook Ad Group data from the source."
+        config:
+          enabled: true
+          event_time: ad_group_updated_at
+          loaded_at_field: ad_group_updated_at
+          meta:
+            owner: "data_team"
+
+      - name: facebook_ads_stats
+        description: "Facebook Ad Stats data from the source."
+        config:
+          enabled: true
+          event_time: ad_date
+          loaded_at_field: ad_date
+          meta:
+            owner: "data_team"

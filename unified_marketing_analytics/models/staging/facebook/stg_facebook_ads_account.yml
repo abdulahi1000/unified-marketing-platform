@@ -1,0 +1,18 @@
+version: 2
+models:
+  - name: stg_facebook_ads_account
+    description: "This model is a staging table for the facebook ad account data."
+    columns:
+      - name: account_id
+        description: "The unique identifier for the facebook ad account."
+        data_tests:
+          - unique
+          - not_null
+      - name: account_name
+        description: "The name of the facebook ad account."
+      - name: ad_currency_code
+        description: "The currency code configured for the facebook ad account."
+      - name: account_created_at
+        description: "The timestamp when the facebook ad account was created."
+      - name: account_updated_at
+        description: "The timestamp when the facebook ad account was last updated."
